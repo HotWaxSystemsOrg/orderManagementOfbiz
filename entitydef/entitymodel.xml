@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of OrderManagement Component</title>
+    <description>None</description>
+    <version>1.0</version>
+
+    <view-entity entity-name="FindOrderView" package-name="org.ofbiz.order">
+
+        <member-entity entity-alias="OH" entity-name="OrderHeader"/>
+        <member-entity entity-alias="ORL" entity-name="OrderRole"/>
+        <member-entity entity-alias="PE" entity-name="Person"/>
+        <member-entity entity-alias="PR" entity-name="PartyRole"/>
+        <member-entity entity-alias="OP" entity-name="OrderPaymentPreference"/>
+        <member-entity entity-alias="OCM" entity-name="OrderContactMech"/>
+        <member-entity entity-alias="PA" entity-name="PostalAddress"/>
+
+        <!-- Fields -->
+        <alias entity-alias="OH" name="orderId"/>
+        <alias entity-alias="ORL" name="partyId"/>
+        <alias entity-alias="PE" name="firstName"/>
+        <alias entity-alias="PE" name="lastName"/>
+        <alias entity-alias="OH" name="statusId"/>
+        <alias entity-alias="OH" name="grandTotal"/>
+        <alias entity-alias="OP" name="paymentMethodTypeId"/>
+        <alias entity-alias="OCM" name="contactMechId"/>
+
+        <!-- Shipping Address -->
+        <alias entity-alias="OH" name="orderId"/>
+        <alias entity-alias="PE" name="partyId"/>
+        <alias entity-alias="PE" name="firstName"/>
+        <alias entity-alias="PE" name="lastName"/>
+        <alias entity-alias="OH" name="statusId"/>
+        <alias entity-alias="OP" name="paymentMethodTypeId"/>
+        <alias entity-alias="PA" name="address1"/>
+        <alias entity-alias="PA" name="city"/>
+
+        <!-- View Links -->
+        <view-link entity-alias="OH" rel-entity-alias="ORL">
+            <key-map field-name="orderId" rel-field-name="orderId"/>
+        </view-link>
+
+        <view-link entity-alias="ORL" rel-entity-alias="PE">
+            <key-map field-name="partyId" rel-field-name="partyId"/>
+        </view-link>
+
+        <view-link entity-alias="PE" rel-entity-alias="PR">
+            <key-map field-name="partyId" rel-field-name="partyId"/>
+        </view-link>
+
+        <view-link entity-alias="OH" rel-entity-alias="OP">
+            <key-map field-name="orderId" rel-field-name="orderId"/>
+        </view-link>
+
+        <view-link entity-alias="OH" rel-entity-alias="OCM">
+            <key-map field-name="orderId" rel-field-name="orderId"/>
+        </view-link>
+
+        <view-link entity-alias="OCM" rel-entity-alias="PA">
+            <key-map field-name="contactMechId" rel-field-name="contactMechId"/>
+        </view-link>
+    </view-entity>
+</entitymodel>
