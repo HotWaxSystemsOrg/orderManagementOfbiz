@@ -21,13 +21,34 @@ under the License.
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/services.xsd">
     <description>OrderManagement Services</description>
-    <vendor></vendor>
+<!--    <vendor></vendor>-->
     <version>1.0</version>
 
-    <service name="noSyntaxError" engine="interface">
-        <description>
-            Dummy service to prevent empty files and syntax error - Remove when the 1st real service will be added here 
-        </description>
-    </service> 
-    
+<!--    Get Orders  -->
+    <service name="findOrders" engine="java" auth="true"
+             location="org.ofbiz.orderView.OrderServices" invoke="findOrders">
+        <description>Service: Get Orders</description>
+
+<!--    Input Attributes    -->
+<!--    Order   -->
+        <attribute name="orderId" type="String" mode="IN" optional="true"/>
+        <attribute name="orderStatusId" type="String" mode="IN" optional="true"/>
+        <attribute name="orderDate" type="String" mode="IN" optional="true"/>
+
+<!--    Party   -->
+        <attribute name="firstName" type="String" mode="IN" optional="true"/>
+        <attribute name="lastName" type="String" mode="IN" optional="true"/>
+
+<!--    Shipping Address   -->
+        <attribute name="address1" type="String" mode="IN" optional="true"/>
+        <attribute name="address2" type="String" mode="IN" optional="true"/>
+        <attribute name="city" type="String" mode="IN" optional="true"/>
+        <attribute name="stateProvinceGeoId" type="String" mode="IN" optional="true"/>
+        <attribute name="postalCode" type="String" mode="IN" optional="true"/>
+        <attribute name="countryGeoId" type="String" mode="IN" optional="true"/>
+
+<!--    Output Attribute : List of orders    -->
+        <attribute name="orderList" type="List" mode="OUT"/>
+    </service>
+
 </services>

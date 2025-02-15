@@ -24,11 +24,12 @@ under the License.
     <!-- ======================== Defaults ======================= -->
     <!-- ========================================================= -->
     <title>Entity of OrderManagement Component</title>
-    <description>None</description>
+    <description>Order View Entity</description>
     <version>1.0</version>
 
-    <view-entity entity-name="FindOrderView" package-name="org.ofbiz.order">
+    <view-entity entity-name="FindOrderView" package-name="org.ofbiz.orderView">
 
+        <!-- Entities (Tables) -->
         <member-entity entity-alias="OH" entity-name="OrderHeader"/>
         <member-entity entity-alias="ORL" entity-name="OrderRole"/>
         <member-entity entity-alias="PE" entity-name="Person"/>
@@ -37,49 +38,60 @@ under the License.
         <member-entity entity-alias="OCM" entity-name="OrderContactMech"/>
         <member-entity entity-alias="PA" entity-name="PostalAddress"/>
 
-        <!-- Fields -->
+        <!-- Order Fields (Attributes) -->
         <alias entity-alias="OH" name="orderId"/>
-        <alias entity-alias="ORL" name="partyId"/>
-        <alias entity-alias="PE" name="firstName"/>
-        <alias entity-alias="PE" name="lastName"/>
-        <alias entity-alias="OH" name="statusId"/>
+        <alias entity-alias="OH" name="orderStatusId" field="statusId"/>
         <alias entity-alias="OH" name="grandTotal"/>
+        <alias entity-alias="OH" name="orderDate"/>
         <alias entity-alias="OP" name="paymentMethodTypeId"/>
-        <alias entity-alias="OCM" name="contactMechId"/>
 
-        <!-- Shipping Address -->
-        <alias entity-alias="OH" name="orderId"/>
+        <!-- Party Fields (Attributes) -->
         <alias entity-alias="PE" name="partyId"/>
         <alias entity-alias="PE" name="firstName"/>
         <alias entity-alias="PE" name="lastName"/>
-        <alias entity-alias="OH" name="statusId"/>
-        <alias entity-alias="OP" name="paymentMethodTypeId"/>
-        <alias entity-alias="PA" name="address1"/>
-        <alias entity-alias="PA" name="city"/>
 
-        <!-- View Links -->
+        <!-- Shipping Address (Attributes) -->
+        <alias entity-alias="PA" name="address1"/>
+        <alias entity-alias="PA" name="address2"/>
+        <alias entity-alias="PA" name="city"/>
+        <alias entity-alias="PA" name="postalCode"/>
+        <alias entity-alias="PA" name="stateProvinceGeoId"/>
+        <alias entity-alias="PA" name="countryGeoId"/>
+
+        <!-- View Links (Joins) -->
         <view-link entity-alias="OH" rel-entity-alias="ORL">
-            <key-map field-name="orderId" rel-field-name="orderId"/>
+            <key-map field-name="orderId" />
         </view-link>
 
         <view-link entity-alias="ORL" rel-entity-alias="PE">
-            <key-map field-name="partyId" rel-field-name="partyId"/>
+            <key-map field-name="partyId"/>
         </view-link>
 
-        <view-link entity-alias="PE" rel-entity-alias="PR">
+        <view-link entity-alias="ORL" rel-entity-alias="PR">
             <key-map field-name="partyId" rel-field-name="partyId"/>
+
+            <entity-condition distinct="true">
+                <condition-expr entity-alias="PR" field-name="roleTypeId"
+                                value="CUSTOMER"/>
+            </entity-condition>
         </view-link>
 
         <view-link entity-alias="OH" rel-entity-alias="OP">
-            <key-map field-name="orderId" rel-field-name="orderId"/>
+            <key-map field-name="orderId"/>
         </view-link>
 
-        <view-link entity-alias="OH" rel-entity-alias="OCM">
-            <key-map field-name="orderId" rel-field-name="orderId"/>
+        <view-link entity-alias="OH" rel-entity-alias="OCM" rel-optional="false">
+            <key-map field-name="orderId"/>
+
+            <entity-condition distinct="true">
+                <condition-expr entity-alias="OCM" field-name="contactMechPurposeTypeId"
+                                value="SHIPPING_LOCATION"/>
+            </entity-condition>
         </view-link>
 
         <view-link entity-alias="OCM" rel-entity-alias="PA">
-            <key-map field-name="contactMechId" rel-field-name="contactMechId"/>
+            <key-map field-name="contactMechId"/>
         </view-link>
+
     </view-entity>
 </entitymodel>
