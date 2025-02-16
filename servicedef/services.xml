@@ -26,7 +26,7 @@ under the License.
 
 <!--    Get Orders  -->
     <service name="findOrders" engine="java" auth="true"
-             location="org.ofbiz.orderView.OrderServices" invoke="findOrders">
+             location="com.ofbiz.orderView.OrderServices" invoke="findOrders">
         <description>Service: Get Orders</description>
 
 <!--    Input Attributes    -->
@@ -49,6 +49,12 @@ under the License.
 
 <!--    Output Attribute : List of orders    -->
         <attribute name="orderList" type="List" mode="OUT"/>
+    </service>
+
+    <service name="noSyntaxError" engine="interface">
+        <description>
+            Dummy service to prevent empty files and syntax error - Remove when the 1st real service will be added here
+        </description>
     </service>
 
 </services>

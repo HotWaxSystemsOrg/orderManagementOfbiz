@@ -21,5 +21,45 @@ under the License.
 <forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://ofbiz.apache.org/Widget-Form" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Form http://ofbiz.apache.org/dtds/widget-form.xsd">
 
+<!--    To find particular order-->
+    <form name="FindOrder" type="single" target="FindOrder" default-entity-name="FindOrderView">
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="orderId" title="orderId"><text-find/></field>
+        <field name="firstName" title="firstName"><text-find/></field>
+        <field name="lastName" title="lastName"><text-find/></field>
+        <field name="orderStatusId" title="orderStatusId"><text-find/></field>
+        <field name="paymentStatusId" title="paymentStatusId"><text-find/></field>
+        <field name="address1" title="address1"><text-find/></field>
+        <field name="address2" title="address2"><text-find/></field>
+        <field name="city" title="city"><text-find/></field>
+        <field name="postalCode" title="postalCode"><text-find/></field>
+        <field name="stateProvinceGeoId" title="stateProvinceGeoId"><text-find/></field>
+        <field name="countryGeoId" title="countryGeoId"><text-find/></field>
+        <field name="searchButton" title="${uiLabelMap.CommonFind}"><submit button-type="button"/></field>
+    </form>
+
+<!--    To list orders-->
+    <form name="ListOrder" type="list" list-name="listIt" paginate-target="FindOfbizDemo" default-entity-name="FindOrderView">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="ofbizDemoctx"/>
+                <field-map field-name="entityName" value="FindOrderView"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <field name="orderId" title="orderId"><display/></field>
+        <field name="firstName" title="firstName"><display/></field>
+        <field name="lastName" title="lastName"><display/></field>
+        <field name="orderStatusId" title="orderStatusId"><display/></field>
+        <field name="paymentStatusId" title="paymentStatusId"><display/></field>
+        <field name="address1" title="address1"><display/></field>
+        <field name="address2" title="address2"><display/></field>
+        <field name="city" title="city"><display/></field>
+        <field name="postalCode" title="postalCode"><display/></field>
+        <field name="stateProvinceGeoId" title="stateProvinceGeoId"><display/></field>
+        <field name="countryGeoId" title="countryGeoId"><display/></field>
+    </form>
 
 </forms>
