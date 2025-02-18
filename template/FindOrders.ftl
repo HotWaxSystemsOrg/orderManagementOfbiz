@@ -60,9 +60,6 @@
                     </td>
                 </tr>
             </table>
-            </td>
-            </tr>
-            </table>
         </div>
     </div>
 </form>
