@@ -24,12 +24,12 @@ under the License.
     <screen name="main">
         <section>
             <actions>
-                <set field="headerItem" value="main"/><!-- this highlights the selected menu-item with name "main" -->
+                <set field="headerItem" value="main"/>
             </actions>
             <widgets>
                 <decorator-screen name="OrderManagementCommonDecorator" location="${parameters.mainDecoratorLocation}">
                     <decorator-section name="body">
-                        <screenlet name="Find Order..."/>
+                        <screenlet name="Find Order"/>
                     </decorator-section>
                 </decorator-screen>
             </widgets>
